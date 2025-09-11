@@ -1,0 +1,21 @@
+<div style="padding: 4px 0;">
+  <div class="row-list">
+    <div class="task-name">
+      <div 
+        class="editable-text" 
+        [attr.contenteditable]="isEditing ? true : null"
+        (blur)="onEditBlur()" 
+        [class.editing]="isEditing"
+      >
+        {{ task.taskDes }}
+      </div>
+    </div>
+    <div class="task-status">{{ task.status }}</div>
+    <div class="task-action">
+      <div class="btn editBtn" *ngIf="!isEditing" (click)="toggleEdit()">Edit</div>
+      <div class="btn editBtn" *ngIf="isEditing" (click)="onSaveEdit()">Update</div>
+      <div class="btn finishedBtn" (click)="onToggleStatus()">finished</div>
+      <div class="btn deleteBtn" (click)="onDeleteTask()">delete</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div id="todo-list-container" class="container">
+  <app-todo-input (addTask)="onTaskAdded($event)"></app-todo-input>
+
+  <div class="group-list">
+    <div class="header-list">
+      <div class="task-name">Todo item</div>
+      <div class="task-status">Status</div>
+      <div class="task-action">Actions</div>
+    </div>
+    <div class="body-list">
+      <div class="row-list" *ngFor="let task of tasks">
+          <app-todo-item 
+            [task]="task" 
+            (toggleStatus)="onToggleStatus(task)"
+            (deleteTask)="onDeleteTask(task)" 
+            (updateTask)="onUpdateTask($event, task)">
+          </app-todo-item>
+      </div>
+    </div>
+  </div>
+</div>

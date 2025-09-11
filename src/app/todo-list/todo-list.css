@@ -1,0 +1,34 @@
+.group-list {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.header-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 1px solid #000;
+    width: 90%;
+    margin: auto;
+    text-transform: uppercase;
+    font-weight: 700;
+
+}
+
+.task-name {
+    flex: 2;
+}
+
+.task-status {
+    flex: 1;
+}
+
+.task-action {
+    flex: 2;
+}
+
+.body-list {
+    padding-bottom: 24px;
+}

@@ -1,0 +1,42 @@
+h1 {
+    text-transform: uppercase;
+    text-align: center;
+    padding: 8px;
+    font-weight: 700;
+    padding-top: 20px;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 8px;
+}
+
+.input-container input {
+    padding: 16px;
+    margin: 8px;
+    width: 50%;
+}
+
+.submitBtn {
+    background-color: #00f;
+    color: #fff;
+    padding: 14px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 10px 5px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.submitBtn:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 255, 0.75);
+}
+
+.warning {
+    padding-left: 12px;
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
