@@ -35,8 +35,7 @@ h1 {
 }
 
 .warning {
-    padding-left: 12px;
     color: red;
     font-size: 12px;
-    margin-top: 5px;
+    margin-left: 52px;
 }
