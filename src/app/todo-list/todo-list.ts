@@ -1,54 +1,30 @@
-import { Component } from '@angular/core';
-import { TodoInput } from '../todo-input/todo-input';
-import { NgFor } from '@angular/common';
-import { TodoItem } from '../todo-item/todo-item';
+import { NgClass, NgFor } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Task } from '../models/task.model';
+import { TodoItem } from './todo-item/todo-item';
 
 @Component({
   selector: 'app-todo-list',
-  standalone: true,
-  imports: [TodoInput, NgFor, TodoItem],
+  imports: [NgFor, TodoItem],
   templateUrl: './todo-list.html',
   styleUrl: './todo-list.css'
 })
 export class TodoList {
-  tasks: { taskDes: string, status: string }[] = [];
+  @Input() tasks: Task[] = [];
 
-  constructor() {
-    if (typeof window !== 'undefined') {
-      const savedTasks = localStorage.getItem('tasks');
-      if (savedTasks) {
-        this.tasks = JSON.parse(savedTasks);
-      }
-    }
+  @Output() toggleStatus = new EventEmitter<string>();
+  @Output() deleteTask = new EventEmitter<string>();
+  @Output() updateTask = new EventEmitter<Task>();
+
+  onToggleStatus(id: string): void {
+    this.toggleStatus.emit(id);
+  }
+  
+  onDeleteTask(id: string): void {
+    this.deleteTask.emit(id);
   }
 
-  saveTasksToLocalStorage() {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('tasks', JSON.stringify(this.tasks));
-    }
-  }
-
-  onTaskAdded(task: { taskDes: string, status: string }) {
-    this.tasks.push(task);
-    console.log(this.tasks);
-    this.saveTasksToLocalStorage();
-  }
-
-  onToggleStatus(task: { taskDes: string, status: string }) {
-    task.status = task.status === 'unfinished' ? 'finished' : 'unfinished';
-    this.saveTasksToLocalStorage();
-  }
-
-  onUpdateTask(updatedTaskDescription: string, taskToUpdate: { taskDes: string, status: string }) {
-    const task = this.tasks.find(t => t.taskDes === taskToUpdate.taskDes);
-    if (task) {
-      task.taskDes = updatedTaskDescription;
-      this.saveTasksToLocalStorage();
-    }
-  }
-
-  onDeleteTask(taskToDelete: { taskDes: string }) {
-    this.tasks = this.tasks.filter(task => task.taskDes !== taskToDelete.taskDes);
-    this.saveTasksToLocalStorage();
+  onUpdateTask(updated: Task): void {
+    this.updateTask.emit(updated);
   }
 }

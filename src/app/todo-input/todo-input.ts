@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { Task } from '../models/task.model';
 
 @Component({
   selector: 'app-todo-input',
@@ -13,24 +14,29 @@ export class TodoInput {
   mess: string = '';
   showWarning: boolean = false;
 
-  @Output() addTask = new EventEmitter<{ taskDes: string, status: string }>();
+  @Output() addTask = new EventEmitter<Task>();
 
   onInputChange() {
     if (this.mess.trim() !== '') {
       this.showWarning = false;
     }
   }
-
-  addTaskToList() {
-    if (this.mess.trim() !== '') {
-      this.addTask.emit({ taskDes: this.mess, status: 'unfinished' });
-      console.log('Add new task: ', this.mess);
-      this.mess = '';
-      this.showWarning = false;
-    } else {
-      console.log('Please enter a task');
+  
+  onTaskAdded(): void {
+    const value = this.mess.trim();
+    if (!value) {
       this.showWarning = true;
-      console.log('Field is required');
+      return;
     }
+
+    const newTask: Task = {
+      id: Date.now().toString(),
+      taskDes: value,
+      status: false 
+    };
+
+    this.addTask.emit(newTask);
+    this.mess = '';
+    this.showWarning = false;
   }
 }

@@ -1,1 +1,9 @@
-<app-todo-list></app-todo-list>
+<app-todo-input (addTask)="onTaskAdded($event)"></app-todo-input>
+
+<app-todo-list 
+    [tasks]="tasks"
+    (toggleStatus)="onToggleStatus($event)"
+    (deleteTask)="onDeleteTask($event)"
+    (updateTask)="onUpdateTask($event)"
+>
+</app-todo-list>

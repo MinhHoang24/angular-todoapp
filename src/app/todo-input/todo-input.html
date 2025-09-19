@@ -1,15 +1,14 @@
 <div class="container">
     <h1>to do app</h1>
-
     <div class="input-container">
         <input 
             type="text" 
             [(ngModel)]="mess" 
             placeholder="Enter task" 
-            (keydown.enter)="addTaskToList()" 
+            (keydown.enter)="onTaskAdded()" 
             (input)="onInputChange()"
         >
-        <div class="submitBtn" (click)="addTaskToList()">add new task</div>
+        <div class="submitBtn" (click)="onTaskAdded()">add new task</div>
     </div>
     <div *ngIf="showWarning" class="warning">
         Field is required.

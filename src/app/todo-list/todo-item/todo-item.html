@@ -4,18 +4,23 @@
       <div 
         class="editable-text" 
         [attr.contenteditable]="isEditing ? true : null"
-        (blur)="onEditBlur()" 
+        (blur)="onEditBlur($event)" 
         [class.editing]="isEditing"
       >
         {{ task.taskDes }}
       </div>
     </div>
-    <div class="task-status">{{ task.status }}</div>
+    <div class="task-status">
+        {{ task.status ? 'Done' : 'Todo' }}
+    </div>
     <div class="task-action">
+        <!-- Edit / Update -->
       <div class="btn editBtn" *ngIf="!isEditing" (click)="toggleEdit()">Edit</div>
       <div class="btn editBtn" *ngIf="isEditing" (click)="onSaveEdit()">Update</div>
-      <div class="btn finishedBtn" *ngIf="task.status === 'unfinished'" (click)="onToggleStatus()">finished</div>
-      <div class="btn finishedBtn" *ngIf="task.status === 'finished'" (click)="onToggleStatus()">undo</div>
+      <!-- Toggle finished/undo -->
+      <div class="btn finishedBtn" *ngIf="!task.status" (click)="onToggleStatus()">finished</div>
+      <div class="btn finishedBtn" *ngIf="task.status" (click)="onToggleStatus()">undo</div>
+      <!-- Delete -->
       <div class="btn deleteBtn" (click)="onDeleteTask()">delete</div>
     </div>
   </div>
